@@ -30,7 +30,7 @@ public class MongoUserService implements UserGenericService<UserDto> {
     }
 
     @Override
-    public void update(Long id, UserDto dto) {
+    public void update(Object id, UserDto dto) {
         User user = userRepository.findById(String.valueOf(id)).orElseThrow(() -> new IllegalArgumentException("User not found"));
         user.setName(dto.getName());
         // Actualizar otros campos si es necesario
@@ -38,7 +38,7 @@ public class MongoUserService implements UserGenericService<UserDto> {
     }
 
     @Override
-    public UserDto findById(Long id) {
+    public UserDto findById(Object id) {
         User user = userRepository.findById(String.valueOf(id)).orElseThrow(() -> new IllegalArgumentException("User not found"));
         return convertToDto(user);
     }
@@ -50,14 +50,16 @@ public class MongoUserService implements UserGenericService<UserDto> {
     }
 
     @Override
-    public void remove(Long id) {
-        userRepository.deleteById(String.valueOf(id));
+    public void remove(Object id) {
+        userRepository.deleteById(id);
     }
 
     // Método auxiliar para convertir User a UserDto
     private UserDto convertToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setName(user.getName());
+        userDto.setId(user.getId());
+
         // Convertir otros campos si es necesario
         return userDto;
     }

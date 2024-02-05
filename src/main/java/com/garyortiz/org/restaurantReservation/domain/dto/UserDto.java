@@ -2,17 +2,17 @@ package com.garyortiz.org.restaurantReservation.domain.dto;
 
 
 public class UserDto {
-    private Long id;
+    private Object id;
     private String name;
 
     public UserDto(){}
 
 
-    public Long getId() {
+    public Object getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Object id) {
         this.id = id;
     }
 

@@ -22,7 +22,7 @@ public class UserController {
 
     // Método para obtener un servicio de usuario específico
     private UserGenericService<UserDto> getUserService() {
-        return userServices.get(0);
+        return userServices.get(1);
     }
 
     @PostMapping
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Object id) {
         UserDto userDto = getUserService().findById(id);
         return userDto != null ?
                 new ResponseEntity<>(userDto, HttpStatus.OK) :
@@ -46,13 +46,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Object id, @RequestBody UserDto userDto) {
         getUserService().update(id, userDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Object id) {
         getUserService().remove(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
