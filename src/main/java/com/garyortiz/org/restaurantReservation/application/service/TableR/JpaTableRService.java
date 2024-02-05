@@ -23,7 +23,8 @@ public class JpaTableRService implements TableRGenericService<TableDto> {
         TableR table = TableR.builder()
                 .estado(tableDto.getStatus())
                 .capacidad(tableDto.getCapacity())
-                .restaurante((Restaurant) tableDto.getRestaurantId()).build();
+                .restaurante((Restaurant) tableDto.getRestaurantId())
+                .build();
 
         tableRepository.save(table);
     }

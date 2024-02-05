@@ -38,10 +38,11 @@ public class TableController {
             }
 
             // Asignar el restaurante al objeto TableDto
-            tableDto.setRestaurantId(restaurant);
+            TableDto tableDto1= new TableDto();
+            tableDto1.setRestaurantId(restaurant);
 
             // Llamar al servicio para crear la mesa
-            getTableService().register(tableDto);
+            getTableService().register(tableDto1);
 
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (IllegalArgumentException ex){

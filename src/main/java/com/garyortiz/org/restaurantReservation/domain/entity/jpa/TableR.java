@@ -15,7 +15,7 @@ public class TableR {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurante;
 

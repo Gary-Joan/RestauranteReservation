@@ -19,6 +19,8 @@ public class JpaUserService implements UserGenericService<UserDto> {
     public void register(UserDto dto) {
         User user = new User();
         user.setNombre(dto.getName());
+        user.setContraseña(dto.getPassword());
+        user.setCorreoElectronico(dto.getMail());
 
         userRepository.save(user);
     }
@@ -53,6 +55,9 @@ public class JpaUserService implements UserGenericService<UserDto> {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getNombre());
+        userDto.setPassword(user.getContraseña());
+        userDto.setMail(user.getCorreoElectronico());
+
         // Convertir otros campos si es necesario
         return userDto;
     }
