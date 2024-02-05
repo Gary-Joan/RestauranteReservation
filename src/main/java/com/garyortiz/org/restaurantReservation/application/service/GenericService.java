@@ -1,4 +1,11 @@
 package com.garyortiz.org.restaurantReservation.application.service;
 
-public class GenericService {
+import java.util.List;
+
+public interface GenericService<Dto> {
+    void register(Dto dto);
+    void update(Long id, Dto dto);
+    Dto findById(Long id);
+    List<Dto> findAll();
+    void remove(Long id);
 }
