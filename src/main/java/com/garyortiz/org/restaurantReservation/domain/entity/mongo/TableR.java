@@ -4,17 +4,13 @@ package com.garyortiz.org.restaurantReservation.domain.entity.mongo;
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-@Document(collection = "booking")
-public class Booking {
-
+@Document(collection = "table")
+public class TableR {
     @Id
     private String id;
 
     private String restauranteId;
-    private String mesaId;
-    private String usuarioId;
-    private LocalDateTime fechaHoraReserva;
+    private int capacidad;
     private String estado;
 
     // Getters y setters
@@ -35,28 +31,12 @@ public class Booking {
         this.restauranteId = restauranteId;
     }
 
-    public String getTableId() {
-        return mesaId;
+    public int getCapacity() {
+        return capacidad;
     }
 
-    public void setTableId(String mesaId) {
-        this.mesaId = mesaId;
-    }
-
-    public String getUserId() {
-        return usuarioId;
-    }
-
-    public void setUserId(String usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public LocalDateTime getBookingDateTime() {
-        return fechaHoraReserva;
-    }
-
-    public void setBookingDateTime(LocalDateTime fechaHoraReserva) {
-        this.fechaHoraReserva = fechaHoraReserva;
+    public void setCapacity(int capacidad) {
+        this.capacidad = capacidad;
     }
 
     public String getStatus() {

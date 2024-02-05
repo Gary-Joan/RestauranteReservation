@@ -12,7 +12,7 @@ public class RestaurantDto {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Object id) {
         this.id = id;
     }
 

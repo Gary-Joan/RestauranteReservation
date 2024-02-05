@@ -14,7 +14,7 @@ public class BookingDto {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Object id) {
         this.id = id;
     }
 
@@ -22,7 +22,7 @@ public class BookingDto {
         return restaurantId;
     }
 
-    public void setRestaurantId(Long restaurantId) {
+    public void setRestaurantId(Object restaurantId) {
         this.restaurantId = restaurantId;
     }
 
@@ -30,7 +30,7 @@ public class BookingDto {
         return tableId;
     }
 
-    public void setTableId(Long tableId) {
+    public void setTableId(Object tableId) {
         this.tableId = tableId;
     }
 
@@ -38,7 +38,7 @@ public class BookingDto {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Object userId) {
         this.userId = userId;
     }
 

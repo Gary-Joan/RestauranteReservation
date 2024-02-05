@@ -22,7 +22,7 @@ public class UserController {
 
     // Método para obtener un servicio de usuario específico
     private UserGenericService<UserDto> getUserService() {
-        return userServices.get(1);
+        return userServices.get(0);
     }
 
     @PostMapping

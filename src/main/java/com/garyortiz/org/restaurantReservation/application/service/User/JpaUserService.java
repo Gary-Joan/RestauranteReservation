@@ -18,7 +18,7 @@ public class JpaUserService implements UserGenericService<UserDto> {
     @Override
     public void register(UserDto dto) {
         User user = new User();
-        user.setName(dto.getName());
+        user.setNombre(dto.getName());
 
         userRepository.save(user);
     }
@@ -26,7 +26,7 @@ public class JpaUserService implements UserGenericService<UserDto> {
     @Override
     public void update(Object id, UserDto dto) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setName(dto.getName());
+        user.setNombre(dto.getName());
         // Actualizar otros campos si es necesario
         userRepository.save(user);
     }
@@ -52,7 +52,7 @@ public class JpaUserService implements UserGenericService<UserDto> {
     private UserDto convertToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
-        userDto.setName(user.getName());
+        userDto.setName(user.getNombre());
         // Convertir otros campos si es necesario
         return userDto;
     }

@@ -2,7 +2,7 @@ package com.garyortiz.org.restaurantReservation.domain.dto;
 
 public class TableDto {
     private Object id;
-    private Long restaurantId;
+    private Object restaurantId;
     private int capacity;
     private String status;
 
@@ -10,15 +10,15 @@ public class TableDto {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Object id) {
         this.id = id;
     }
 
-    public Long getRestaurantId() {
+    public Object getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(Long restaurantId) {
+    public void setRestaurantId(Object restaurantId) {
         this.restaurantId = restaurantId;
     }
 
