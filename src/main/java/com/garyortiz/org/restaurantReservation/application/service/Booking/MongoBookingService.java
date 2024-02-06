@@ -17,7 +17,7 @@ public class MongoBookingService implements BookingGenericService<BookingDto> {
     private MongoBookingRepository bookingRepository;
 
     @Override
-    public void register(BookingDto bookingDto) {
+    public String register(BookingDto bookingDto) {
         Booking booking = new Booking();
         booking.setId(UUID.randomUUID().toString());
         booking.setRestaurantId((String) bookingDto.getRestaurantId());
@@ -27,6 +27,7 @@ public class MongoBookingService implements BookingGenericService<BookingDto> {
         booking.setStatus(bookingDto.getStatus());
 
         bookingRepository.save(booking);
+        return "";
     }
 
     @Override

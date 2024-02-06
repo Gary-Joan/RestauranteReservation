@@ -20,7 +20,7 @@ public class JpaBookingService implements BookingGenericService<BookingDto> {
     private BookingRepository bookingRepository;
 
     @Override
-    public void register(BookingDto bookingDto) {
+    public String register(BookingDto bookingDto) {
         Booking booking = new Booking();
         booking.setRestaurantId((Restaurant) bookingDto.getRestaurantId());
         booking.setTableId((TableR) bookingDto.getTableId());
@@ -29,6 +29,7 @@ public class JpaBookingService implements BookingGenericService<BookingDto> {
         booking.setStatus(bookingDto.getStatus());
 
         bookingRepository.save(booking);
+        return "";
     }
 
     @Override

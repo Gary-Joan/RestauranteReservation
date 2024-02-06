@@ -21,12 +21,13 @@ public class MongoUserService implements UserGenericService<UserDto> {
     private MongoUserRepository userRepository;
 
     @Override
-    public void register(UserDto dto) {
+    public String register(UserDto dto) {
         User user = new User();
         user.setName(dto.getName());
         user.setId(UUID.randomUUID().toString());
 
         userRepository.save(user);
+        return"";
     }
 
     @Override

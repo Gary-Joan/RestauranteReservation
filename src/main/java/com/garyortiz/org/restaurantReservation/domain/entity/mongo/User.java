@@ -12,8 +12,8 @@ public class User {
     private String id;
 
     private String nombre;
-    private String correoElectronico;
-    private String contraseña;
+    private String email;
+    private String password;
     private String rol;
 
     public void setName(String name) {

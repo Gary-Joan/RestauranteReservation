@@ -3,7 +3,7 @@ package com.garyortiz.org.restaurantReservation.application.service;
 import java.util.List;
 
 public interface GenericService<Dto> {
-    void register(Dto dto);
+    String register(Dto dto);
     void update(Object id, Dto dto);
     Dto findById(Object id);
     List<Dto> findAll();

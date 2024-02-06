@@ -1,9 +1,18 @@
 package com.garyortiz.org.restaurantReservation.application.service.User;
 
+import com.garyortiz.org.restaurantReservation.application.exception.DemoSecurityException;
+import com.garyortiz.org.restaurantReservation.application.lasting.EMessage;
+import com.garyortiz.org.restaurantReservation.application.lasting.ERole;
+import com.garyortiz.org.restaurantReservation.application.service.JwtService;
+import com.garyortiz.org.restaurantReservation.domain.dto.AuthenticationDto;
 import com.garyortiz.org.restaurantReservation.domain.dto.UserDto;
 import com.garyortiz.org.restaurantReservation.domain.entity.jpa.User;
 import com.garyortiz.org.restaurantReservation.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +23,24 @@ public class JpaUserService implements UserGenericService<UserDto> {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    JwtService jwtService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @Override
-    public void register(UserDto dto) {
-        User user = new User();
-        user.setNombre(dto.getName());
-        user.setContraseña(dto.getPassword());
-        user.setCorreoElectronico(dto.getMail());
+    public String register(UserDto dto) {
+        User user= User.builder()
+                .nombre(dto.getName())
+                .email(dto.getMail())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .rol(ERole.USER)
+                .build();
 
         userRepository.save(user);
+        return jwtService.generateToken((UserDetails) user);
     }
 
     @Override
@@ -55,8 +73,8 @@ public class JpaUserService implements UserGenericService<UserDto> {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getNombre());
-        userDto.setPassword(user.getContraseña());
-        userDto.setMail(user.getCorreoElectronico());
+        userDto.setPassword(user.getPassword());
+        userDto.setEmail(user.getEmail());
 
         // Convertir otros campos si es necesario
         return userDto;
@@ -67,5 +85,20 @@ public class JpaUserService implements UserGenericService<UserDto> {
         return users.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    public String login(AuthenticationDto authenticationDto) throws DemoSecurityException {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        authenticationDto.email(),
+                        authenticationDto.password()
+                )
+        );
+        User user = userRepository.findUserByEmail(
+                authenticationDto.email()
+        ).orElseThrow(
+                () -> new DemoSecurityException(EMessage.USER_NOT_FOUND)
+        );
+        return jwtService.generateToken((UserDetails) user);
     }
 }

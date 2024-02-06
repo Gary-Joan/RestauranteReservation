@@ -16,7 +16,7 @@ public class MongoRestaurantService implements RestaurantGenericService<Restaura
     private MongoRestaurantRepository restaurantRepository;
 
     @Override
-    public void register(RestaurantDto restaurantDto) {
+    public String register(RestaurantDto restaurantDto) {
         Restaurant restaurant = new Restaurant();
         restaurant.setNombre(restaurantDto.getName());
         restaurant.setDireccion(restaurantDto.getAddress());
@@ -25,6 +25,7 @@ public class MongoRestaurantService implements RestaurantGenericService<Restaura
         restaurant.setHorarioCierre(restaurantDto.getClosingHours());
 
         restaurantRepository.save(restaurant);
+        return "";
     }
 
     @Override

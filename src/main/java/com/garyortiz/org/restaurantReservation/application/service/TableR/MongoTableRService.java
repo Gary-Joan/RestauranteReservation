@@ -17,12 +17,13 @@ public class MongoTableRService implements TableRGenericService<TableDto> {
     private MongoTableRepository tableRepository;
 
     @Override
-    public void register(TableDto tableDto) {
+    public String register(TableDto tableDto) {
         TableR table = new TableR();
         table.setCapacity(tableDto.getCapacity());
         table.setStatus(tableDto.getStatus());
 
         tableRepository.save(table);
+        return "";
     }
 
     @Override

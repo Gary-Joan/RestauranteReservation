@@ -18,7 +18,7 @@ public class JpaTableRService implements TableRGenericService<TableDto> {
     private TableRepository tableRepository;
 
     @Override
-    public void register(TableDto tableDto) {
+    public String register(TableDto tableDto) {
 
         TableR table = TableR.builder()
                 .estado(tableDto.getStatus())
@@ -27,6 +27,7 @@ public class JpaTableRService implements TableRGenericService<TableDto> {
                 .build();
 
         tableRepository.save(table);
+        return "";
     }
 
     @Override

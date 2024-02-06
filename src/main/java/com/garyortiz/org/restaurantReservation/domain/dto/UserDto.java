@@ -1,13 +1,15 @@
 package com.garyortiz.org.restaurantReservation.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
     private Object id;
     private String name;
 
     private String password;
 
-    private String mail;
+    private String email;
 
     public UserDto(){}
 
@@ -37,10 +39,10 @@ public class UserDto {
     }
 
     public String getMail() {
-        return mail;
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
